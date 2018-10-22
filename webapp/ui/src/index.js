@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 import { BrowserRouter } from 'react-router-dom';
 
-import "semantic-ui-css/semantic.css";
 import 'antd/dist/antd.css';
 
 import configureStore from "./app/store/configureStore";

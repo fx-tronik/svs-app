@@ -35,7 +35,6 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
     "reqwest": "^2.0.5",
-    "semantic-ui-css": "^2.4.0",
     "style-loader": "^0.23.0",
     "url-loader": "^1.1.1",
     "webpack": "^4.17.1",
