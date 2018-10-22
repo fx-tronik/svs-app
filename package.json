@@ -1,0 +1,49 @@
+{
+  "name": "svs-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development ./webapp/ui/src/index.js --output ./webapp/ui/static/ui/main.js",
+    "build": "webpack --mode production ./webapp/ui/src/index.js --output ./webapp/ui/static/ui/main.js",
+    "flush": "pipenv run python ./webapp/manage.py flush --no-input",
+    "e2e": "cypress open --project ./webapp/ui/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "antd": "^3.8.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap": "^4.1.3",
+    "css-loader": "^1.0.0",
+    "cypress": "^3.1.0",
+    "file-loader": "^2.0.0",
+    "jquery": "^3.3.1",
+    "jsmpeg-player": "^1.2.4",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "react-svg-loader": "^2.1.0",
+    "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-thunk": "^2.3.0",
+    "reqwest": "^2.0.5",
+    "semantic-ui-css": "^2.4.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.2",
+    "ws": "^6.1.0"
+  },
+  "dependencies": {
+    "react-router-dom": "^4.3.1"
+  },
+  "description": ""
+}

@@ -1,0 +1,546 @@
+[
+        {
+            "model": "rest.Camera_type",
+            "pk": 1,
+            "fields": {
+                "camera_model": "1st-camera-model",
+                "custom_camera_url": "http://{admin}:{password}@{ip}/path/to/stream"
+            }
+        },
+        {
+            "model": "rest.Camera_type",
+            "pk": 2,
+            "fields": {
+                "camera_model": "2nd-camera-model",
+                "custom_camera_url": "http://{admin}:{password}@{ip}/path/to/stream"
+            }
+        },
+        {
+            "model": "rest.Camera_type",
+            "pk": 3,
+            "fields": {
+                "camera_model": "3rd-camera-model",
+                "custom_camera_url": "http://{admin}:{password}@{ip}/path/to/stream"
+            }
+        },
+        {
+            "model": "rest.Camera_type",
+            "pk": 4,
+            "fields": {
+                "camera_model": "4th-camera-model",
+                "custom_camera_url": "http://{admin}:{password}@{ip}/path/to/stream"
+            }
+        },
+        {
+            "model": "rest.Camera_type",
+            "pk": 5,
+            "fields": {
+                "camera_model": "Nvidia",
+                "custom_camera_url": "rtsp://192.168.1.201:8554/test"
+            }
+        },
+        {
+            "model": "rest.Camera_type",
+            "pk": 6,
+            "fields": {
+                "camera_model": "MP4",
+                "custom_camera_url": "/pliki/Monitoring/2015_0101_092749_003.MP4"
+            }
+        },
+        {
+            "model": "rest.Camera_type",
+            "pk": 7,
+            "fields": {
+                "camera_model": "MP4_2",
+                "custom_camera_url": "/pliki/Monitoring/2015_0106_192117_064.MP4"
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 1,
+            "fields": {
+                "name": "1st-camera",
+                "ip": "192.168.1.1",
+                "login": "user",
+                "password": "eithi7Bo",
+                "camera_type_id": 1
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 2,
+            "fields": {
+                "name": "2nd-camera",
+                "ip": "192.168.1.2",
+                "login": "user2",
+                "password": "eithi7Bo2",
+                "camera_type_id": 2
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 3,
+            "fields": {
+                "name": "3rd-camera",
+                "ip": "192.168.1.3",
+                "login": "user3",
+                "password": "eithi7Bo3",
+                "camera_type_id": 3
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 4,
+            "fields": {
+                "name": "4th-camera",
+                "ip": "192.168.1.4",
+                "login": "user4",
+                "password": "eithi7Bo4",
+                "camera_type_id": 4
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 5,
+            "fields": {
+                "name": "Nvidia",
+                "ip": "192.168.1.201",
+                "login": "test",
+                "password": "test",
+                "camera_type_id": 5
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 6,
+            "fields": {
+                "name": "Film_1",
+                "ip": "0.0.0.0",
+                "login": "test",
+                "password": "test",
+                "camera_type_id": 6
+            }
+        },
+        {
+            "model": "rest.Camera",
+            "pk": 7,
+            "fields": {
+                "name": "Film_2",
+                "ip": "0.0.0.0",
+                "login": "test",
+                "password": "test",
+                "camera_type_id": 7
+            }
+        },
+        {
+            "model": "rest.Alert_history",
+            "pk": 1,
+            "fields": {
+                "message": "Very long success text",
+		"type": "0",
+		"created_at": "2018-09-01 00:00:00"
+            }
+        },
+        {
+            "model": "rest.Alert_history",
+            "pk": 2,
+            "fields": {
+                "message": "Very long info description",
+		"type": "1",
+		"created_at": "2018-09-02 00:00:00"
+            }
+        },
+        {
+            "model": "rest.Alert_history",
+            "pk": 3,
+            "fields": {
+                "message": "Very long warning text",
+		"type": "2",
+		"created_at": "2018-09-03 00:00:00"
+            }
+        },
+        {
+            "model": "rest.Alert_history",
+            "pk": 4,
+            "fields": {
+                "message": "Very long error text",
+		"type": "3",
+		"created_at": "2018-09-04 00:00:00"
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 1,
+            "fields": {
+                "id": "DI1",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 2,
+            "fields": {
+                "id": "DI2",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 3,
+            "fields": {
+                "id": "DI3",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 4,
+            "fields": {
+                "id": "DI4",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 5,
+            "fields": {
+                "id": "DI5",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 6,
+            "fields": {
+                "id": "DI6",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 7,
+            "fields": {
+                "id": "DI7",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 8,
+            "fields": {
+                "id": "DI8",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 9,
+            "fields": {
+                "id": "DO1",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 10,
+            "fields": {
+                "id": "DO2",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 11,
+            "fields": {
+                "id": "DO3",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 12,
+            "fields": {
+                "id": "DO4",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 13,
+            "fields": {
+                "id": "DO5",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 14,
+            "fields": {
+                "id": "DO6",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 15,
+            "fields": {
+                "id": "DO7",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 16,
+            "fields": {
+                "id": "DO8",
+		"value": 1
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 17,
+            "fields": {
+                "id": "HMI1",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 18,
+            "fields": {
+                "id": "HMI2",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 19,
+            "fields": {
+                "id": "HMI3",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 20,
+            "fields": {
+                "id": "HMI4",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 21,
+            "fields": {
+                "id": "HMI5",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 22,
+            "fields": {
+                "id": "HMI6",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 23,
+            "fields": {
+                "id": "HMI7",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Infrastructure",
+            "pk": 24,
+            "fields": {
+                "id": "HMI8",
+		"value": 0
+            }
+        },
+        {
+            "model": "rest.Zone",
+            "pk": 1,
+            "fields": {
+                "name": "1st-zone",
+		"origin_camera": 1
+            }
+        },
+        {
+            "model": "rest.Zone",
+            "pk": 2,
+            "fields": {
+                "name": "2nd-zone",
+		"origin_camera": 1
+            }
+        },
+        {
+            "model": "rest.Zone",
+            "pk": 3,
+            "fields": {
+                "name": "empty-zone",
+		"origin_camera": 2
+            }
+        },
+        {
+            "model": "rest.Zone",
+            "pk": 4,
+            "fields": {
+                "name": "empty-zone",
+		"origin_camera": 3
+            }
+        },
+        {
+            "model": "rest.Zone",
+            "pk": 5,
+            "fields": {
+                "name": "1st-zone",
+		"origin_camera": 5
+            }
+        },
+        {
+            "model": "rest.Zone",
+            "pk": 6,
+            "fields": {
+                "name": "2nd-zone",
+		"origin_camera": 5
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 1,
+            "fields": {
+                "zone": 1,
+		"x": 990,
+		"y": 190
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 2,
+            "fields": {
+                "zone": 1,
+		"x": 853,
+		"y": 246
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 3,
+            "fields": {
+                "zone": 1,
+		"x": 964,
+		"y": 458
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 4,
+            "fields": {
+                "zone": 1,
+		"x": 1068,
+		"y": 406
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 5,
+            "fields": {
+                "zone": 2,
+		"x": 990,
+		"y": 190
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 6,
+            "fields": {
+                "zone": 2,
+		"x": 853,
+		"y": 246
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 7,
+            "fields": {
+                "zone": 2,
+		"x": 1068,
+		"y": 406
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 8,
+            "fields": {
+                "zone": 5,
+		"x": 990,
+		"y": 190
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 9,
+            "fields": {
+                "zone": 5,
+		"x": 853,
+		"y": 246
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 10,
+            "fields": {
+                "zone": 5,
+		"x": 964,
+		"y": 458
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 11,
+            "fields": {
+                "zone": 5,
+		"x": 1068,
+		"y": 406
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 12,
+            "fields": {
+                "zone": 6,
+		"x": 371,
+		"y": 276
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 13,
+            "fields": {
+                "zone": 6,
+		"x": 380,
+		"y": 451
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 14,
+            "fields": {
+                "zone": 6,
+		"x": 728,
+		"y": 445
+            }
+        },
+        {
+            "model": "rest.ZonePolygon",
+            "pk": 15,
+            "fields": {
+                "zone": 6,
+		"x": 663,
+		"y": 260
+            }
+        }
+]

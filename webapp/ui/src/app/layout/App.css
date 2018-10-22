@@ -1,0 +1,83 @@
+.path4060-9-on #path4060-9,
+.path4060-9-9-on #path4060-9-9,
+.path4060-9-0-on #path4060-9-0,
+.path4060-9-1-on #path4060-9-1,
+.path4060-9-6-on #path4060-9-6,
+.path4060-9-91-on #path4060-9-91,
+.path4060-9-91-2-on #path4060-9-91-2,
+.path4060-9-91-3-on #path4060-9-91-3 {
+  fill: #FFFF00;
+}
+
+.rect4319-1-on #rect4319-1,
+.rect4319-1-7-on #rect4319-1-7,
+.rect4319-1-7-4-on #rect4319-1-7-4,
+.rect4319-1-7-0-on #rect4319-1-7-0,
+.rect4319-1-7-5-on #rect4319-1-7-5,
+.rect4319-1-7-6-on #rect4319-1-7-6,
+.rect4319-1-7-1-on #rect4319-1-7-1,
+.rect4319-1-7-3-on #rect4319-1-7-3 {
+  fill: #00FF00;
+}
+
+#inputId { 
+  display: none;
+}
+
+.logo {
+  width: 60px;
+  height: 40px;
+  margin: 16px;
+}
+
+.header {
+  height: 205px;
+  background: #f8f8f8;
+  padding: 0;
+  position: 'fixed';
+}
+
+.header-image {
+  height: 205px;
+}
+
+.custom-filter-dropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+
+.custom-filter-dropdown input {
+  width: 130px;
+  margin-right: 8px;
+}
+
+.custom-filter-dropdown button {
+  margin-right: 8px;
+}
+
+.highlight {
+  color: #f50;
+}
+
+.editable-cell {
+  position: relative;
+}
+
+.editable-cell-value-wrap {
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.editable-row:hover .editable-cell-value-wrap {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 11px;
+}
+
+.editable-row .ant-form-explain {
+  position: absolute;
+  font-size: 12px;
+  margin-top: -4px;
+}

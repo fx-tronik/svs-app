@@ -1,0 +1,10 @@
+włącz kamere
+ssh nvidia@192.168.1.201
+nvidia
+cd workspace/rtsp server
+python server.py
+
+włącz websockety
+cd websocket
+node websocket-relay.js
+

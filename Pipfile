@@ -1,0 +1,17 @@
+[[source]]
+verify_ssl = true
+name = "pypi"
+url = "https://pypi.org/simple"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-db-constraints = "*"
+"psycopg2" = "*"
+"psycopg2-binary" = "*"
+
+[dev-packages]
+coverage = "*"
+
+[requires]
+python_version = "3.5"
