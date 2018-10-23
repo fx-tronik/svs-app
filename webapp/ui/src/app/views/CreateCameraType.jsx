@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchCameraTypesIfNeeded, addCameraType } from '../../api/cameraTypes/actions'
 
+import CSRFToken from '../../features/CSRFToken'
+
 const FormItem = Form.Item
 
 class CameraTypeForm extends React.Component {
@@ -58,6 +60,7 @@ class CameraTypeForm extends React.Component {
 
 	return (
 	      <Form onSubmit={this.handleSubmit}>
+                <CSRFToken />
 		<FormItem
 		  {...formItemLayout}
 		  label={(
