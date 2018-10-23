@@ -12,7 +12,8 @@ function cameraTypeEntity(
     entries: [],
     idOfDeletedEntry: null,
     idOfUpdatedEntry: null,
-    failure: null
+    failure: null,
+    csrfToken: null
   },
   action
 ) {
@@ -37,7 +38,8 @@ function cameraTypeEntity(
         didInvalidate: false,
         idOfDeletedEntry: null,
         idOfUpdatedEntry: null,
-        entries: action.entries
+        entries: action.entries,
+        csrfToken: action.csrfToken
       })
     case REQUEST_CAMERA_TYPE_DELETION:
       return Object.assign({}, state, {

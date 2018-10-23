@@ -11,7 +11,8 @@ function cameraEntity(
     areCameraZonesSettingOrUpdating: false,
     didInvalidate: true,
     entries: [],
-    failure: null
+    failure: null,
+    csrfToken: null
   },
   action
 ) {
@@ -35,7 +36,8 @@ function cameraEntity(
         isDeleting: false,
         areCameraZonesSettingOrUpdating: false,
         didInvalidate: false,
-        entries: action.entries
+        entries: action.entries,
+        csrfToken: action.csrfToken
       })
     case REQUEST_SET_OR_UPDATE_CAMERA_ZONES:
       return Object.assign({}, state, {

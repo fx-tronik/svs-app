@@ -12,7 +12,8 @@ function infrastructureEntity(
     entries: [],
     idOfDeletedEntry: null,
     idOfUpdatedEntry: null,
-    failure: null
+    failure: null,
+    csrfToken: null
   },
   action
 ) {
@@ -37,7 +38,8 @@ function infrastructureEntity(
         didInvalidate: false,
         idOfDeletedEntry: null,
         idOfUpdatedEntry: null,
-        entries: action.entries
+        entries: action.entries,
+        csrfToken: action.csrfToken
       })
     case REQUEST_DELETION_FROM_INFRASTRUCTURE:
       return Object.assign({}, state, {

@@ -1,4 +1,5 @@
 import reqwest from 'reqwest'
+import Cookies from 'js-cookie'
 
 export const REQUEST_CAMERAS = 'REQUEST_CAMERAS'
 export const RECEIVE_CAMERAS = 'RECEIVE_CAMERAS'
@@ -86,10 +87,11 @@ function requestCameras() {
   }
 }
 
-function receiveCameras(cameras) {
+function receiveCameras(cameras, token) {
   return {
     type: RECEIVE_CAMERAS,
-    entries: cameras
+    entries: cameras,
+    csrfToken: token
   }
 }
 
@@ -106,7 +108,7 @@ function fetchCameras() {
       url: 'api/camera/',
       method: 'get',
       type: 'json'
-    }).then((cameras) => dispatch(receiveCameras(cameras)))
+    }).then((cameras) => dispatch(receiveCameras(cameras, Cookies.get('csrftoken'))))
       .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
   }
 }
@@ -131,57 +133,81 @@ export function fetchCamerasIfNeeded() {
 }
 
 export function setOrUpdateCameraZones(service_url, id, camera_zones) {
-  return dispatch => {
-    dispatch(requestSetOrUpdateCameraZones())
-    return reqwest({
-      url: service_url,
-      method: 'post',
-      data: JSON.stringify(camera_zones),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((retrieved_zones) => {
-       let filtered_zones = retrieved_zones.filter(zone => zone.camera === id)
-       dispatch(confirmSetOrUpdateCameraZones(id, filtered_zones))
-    }).fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraEntity = getState().cameraReducer.cameraEntity
+    if (cameraEntity) {
+      dispatch(requestSetOrUpdateCameraZones())
+      return reqwest({
+        url: service_url,
+        method: 'post',
+        data: JSON.stringify(camera_zones),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraEntity.csrfToken 
+        }
+      }).then((retrieved_zones) => {
+         let filtered_zones = retrieved_zones.filter(zone => zone.camera === id)
+         dispatch(confirmSetOrUpdateCameraZones(id, filtered_zones))
+      }).fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+     } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
 
 export function deleteCameraById(id) {
-  return dispatch => {
-    dispatch(requestCameraDeletion())
-    return reqwest({
-      url: 'api/camera/' + id + '/',
-      method: 'delete',
-      type: 'json'
-    }).then((response) => dispatch(confirmCameraDeletion(id)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraEntity = getState().cameraReducer.cameraEntity
+    if (cameraEntity) {
+      dispatch(requestCameraDeletion())
+      return reqwest({
+        url: 'api/camera/' + id + '/',
+        method: 'delete',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraEntity.csrfToken 
+        }
+      }).then((response) => dispatch(confirmCameraDeletion(id)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+     } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
 
 export function updateCamera(id, newValues) {
-  return dispatch => {
-    dispatch(requestCameraActualization())
-    return reqwest({
-      url: 'api/camera/' + id + '/',
-      method: 'put',
-      data: JSON.stringify(newValues),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((response) => dispatch(confirmCameraActualization(id, newValues)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraEntity = getState().cameraReducer.cameraEntity
+    if (cameraEntity) {
+      dispatch(requestCameraActualization())
+      return reqwest({
+        url: 'api/camera/' + id + '/',
+        method: 'put',
+        data: JSON.stringify(newValues),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraEntity.csrfToken 
+        }
+      }).then((response) => dispatch(confirmCameraActualization(id, newValues)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+     } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
 
 export function addCamera(newValues) {
-  return dispatch => {
-    dispatch(requestCameraAddition())
-    return reqwest({
-      url: 'api/camera/',
-      method: 'post',
-      data: JSON.stringify(newValues),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((data) => dispatch(confirmCameraAddition(data)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraEntity = getState().cameraReducer.cameraEntity
+    if (cameraEntity) {
+      dispatch(requestCameraAddition())
+      return reqwest({
+        url: 'api/camera/',
+        method: 'post',
+        data: JSON.stringify(newValues),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraEntity.csrfToken 
+        }
+      }).then((data) => dispatch(confirmCameraAddition(data)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+     } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }

@@ -1,4 +1,5 @@
 import reqwest from 'reqwest'
+import Cookies from 'js-cookie'
 
 export const REQUEST_INFRASTRUCTURE_STATE = 'REQUEST_INFRASTRUCTURE_STATE'
 export const RECEIVE_INFRASTRUCTURE_STATE = 'RECEIVE_INFRASTRUCTURE_STATE'
@@ -69,10 +70,11 @@ function requestInfrastructureState() {
   }
 }
 
-function receiveInfrastructureState(infrastructureState) {
+function receiveInfrastructureState(infrastructureState, token) {
   return {
     type: RECEIVE_INFRASTRUCTURE_STATE,
-    entries: infrastructureState
+    entries: infrastructureState,
+    csrfToken: token
   }
 }
 
@@ -89,7 +91,7 @@ function fetchInfrastructureState() {
       url: 'api/infrastructure/',
       method: 'get',
       type: 'json'
-    }).then((infrastructureState) => dispatch(receiveInfrastructureState(infrastructureState)))
+    }).then((infrastructureState) => dispatch(receiveInfrastructureState(infrastructureState, Cookies.get('csrftoken'))))
       .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
   }
 }
@@ -114,42 +116,60 @@ export function fetchInfrastructureStateIfNeeded() {
 }
 
 export function deleteInfrastructureComponentById(id) {
-  return dispatch => {
-    dispatch(requestDeletionFromInfrastructure())
-    return reqwest({
-      url: 'api/infrastructure/' + id + '/',
-      method: 'delete',
-      type: 'json'
-    }).then((response) => dispatch(confirmDeletionFromInfrastructure(id)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
-  }
+  return (dispatch, getState) => {
+    const infrastructureEntity = getState().infrastructureReducer.infrastructureEntity
+    if (infrastructureEntity) {
+      dispatch(requestDeletionFromInfrastructure())
+      return reqwest({
+        url: 'api/infrastructure/' + id + '/',
+        method: 'delete',
+        type: 'json',
+        headers: {
+           'X-CSRFToken': infrastructureEntity.csrfToken 
+        }
+      }).then((response) => dispatch(confirmDeletionFromInfrastructure(id)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+      } else dispatch(setFailureMessage(FAILURE_MESSAGE))
+    }
 }
 
 export function updateInfrastructureComponent(id, newValue) {
-  return dispatch => {
-    dispatch(requestInfrastructureActualization())
-    const data = {id: `${id}`,value: `${newValue}`}
-    return reqwest({
-      url: 'api/infrastructure/' + id + '/',
-      method: 'put',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((response) => dispatch(confirmInfrastructureActualization(id, newValue)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const infrastructureEntity = getState().infrastructureReducer.infrastructureEntity
+    if (infrastructureEntity) {
+      dispatch(requestInfrastructureActualization())
+      const data = {id: `${id}`,value: `${newValue}`}
+      return reqwest({
+        url: 'api/infrastructure/' + id + '/',
+        method: 'put',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+           'X-CSRFToken': infrastructureEntity.csrfToken 
+        }
+      }).then((response) => dispatch(confirmInfrastructureActualization(id, newValue)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+    } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
 
 export function addInfrastructureComponent(newValues) {
-  return dispatch => {
-    dispatch(requestAdditionIntoInfrastructure())
-    return reqwest({
-      url: 'api/infrastructure/',
-      method: 'post',
-      data: JSON.stringify(newValues),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((data) => dispatch(confirmAdditionIntoInfrastructure(data)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const infrastructureEntity = getState().infrastructureReducer.infrastructureEntity
+    if (infrastructureEntity) {
+      dispatch(requestAdditionIntoInfrastructure())
+      return reqwest({
+        url: 'api/infrastructure/',
+        method: 'post',
+        data: JSON.stringify(newValues),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+           'X-CSRFToken': infrastructureEntity.csrfToken 
+        }
+      }).then((data) => dispatch(confirmAdditionIntoInfrastructure(data)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+    } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }

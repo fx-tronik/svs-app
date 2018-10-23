@@ -1,4 +1,5 @@
 import reqwest from 'reqwest'
+import Cookies from 'js-cookie'
 
 export const REQUEST_CAMERA_TYPES = 'REQUEST_CAMERA_TYPES'
 export const RECEIVE_CAMERA_TYPES = 'RECEIVE_CAMERA_TYPES'
@@ -69,10 +70,11 @@ function requestCameraTypes() {
   }
 }
 
-function receiveCameraTypes(cameraTypes) {
+function receiveCameraTypes(cameraTypes, token) {
   return {
     type: RECEIVE_CAMERA_TYPES,
-    entries: cameraTypes
+    entries: cameraTypes,
+    csrfToken: token
   }
 }
 
@@ -89,7 +91,7 @@ function fetchCameraTypes() {
       url: 'api/camera-type/',
       method: 'get',
       type: 'json'
-    }).then((cameraTypes) => dispatch(receiveCameraTypes(cameraTypes)))
+    }).then((cameraTypes) => dispatch(receiveCameraTypes(cameraTypes, Cookies.get('csrftoken'))))
       .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
   }
 }
@@ -114,41 +116,59 @@ export function fetchCameraTypesIfNeeded() {
 }
 
 export function deleteCameraTypeById(id) {
-  return dispatch => {
-    dispatch(requestCameraTypeDeletion())
-    return reqwest({
-      url: 'api/camera-type/' + id + '/',
-      method: 'delete',
-      type: 'json'
-    }).then((response) => dispatch(confirmCameraTypeDeletion(id)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraTypeEntity = getState().cameraTypeReducer.cameraTypeEntity
+    if (cameraTypeEntity) {
+      dispatch(requestCameraTypeDeletion())
+      return reqwest({
+        url: 'api/camera-type/' + id + '/',
+        method: 'delete',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraTypeEntity.csrfToken 
+        }
+      }).then((response) => dispatch(confirmCameraTypeDeletion(id)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+    } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
 
 export function updateCameraType(id, newValues) {
-  return dispatch => {
-    dispatch(requestCameraTypeActualization())
-    return reqwest({
-      url: 'api/camera-type/' + id + '/',
-      method: 'put',
-      data: JSON.stringify(newValues),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((response) => dispatch(confirmCameraTypeActualization(id, newValues)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraTypeEntity = getState().cameraTypeReducer.cameraTypeEntity
+    if (cameraTypeEntity) {
+      dispatch(requestCameraTypeActualization())
+      return reqwest({
+        url: 'api/camera-type/' + id + '/',
+        method: 'put',
+        data: JSON.stringify(newValues),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraTypeEntity.csrfToken 
+        }
+      }).then((response) => dispatch(confirmCameraTypeActualization(id, newValues)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+    } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
 
 export function addCameraType(newValues) {
-  return dispatch => {
-    dispatch(requestCameraTypeAddition())
-    return reqwest({
-      url: 'api/camera-type/',
-      method: 'post',
-      data: JSON.stringify(newValues),
-      contentType: 'application/json',
-      type: 'json'
-    }).then((data) => dispatch(confirmCameraTypeAddition(data)))
-      .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+  return (dispatch, getState) => {
+    const cameraTypeEntity = getState().cameraTypeReducer.cameraTypeEntity
+    if (cameraTypeEntity) {
+      dispatch(requestCameraTypeAddition())
+      return reqwest({
+        url: 'api/camera-type/',
+        method: 'post',
+        data: JSON.stringify(newValues),
+        contentType: 'application/json',
+        type: 'json',
+        headers: {
+         'X-CSRFToken': cameraTypeEntity.csrfToken 
+        }
+      }).then((data) => dispatch(confirmCameraTypeAddition(data)))
+        .fail((error) => dispatch(setFailureMessage(FAILURE_MESSAGE)))
+    } else dispatch(setFailureMessage(FAILURE_MESSAGE))
   }
 }
