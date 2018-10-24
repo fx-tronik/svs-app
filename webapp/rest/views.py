@@ -34,3 +34,7 @@ class ZoneListView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = models.Employee.objects.all()
+    serializer_class = serializers.EmployeeSerializer

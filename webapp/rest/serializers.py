@@ -5,6 +5,7 @@ from rest.models import Alert_history
 from rest.models import Infrastructure
 from rest.models import ZonePolygon
 from rest.models import Zone
+from rest.models import Employee
 
 from django.db.models import F
 
@@ -146,3 +147,10 @@ class CameraSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class EmployeeSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = Employee
+            fields = '__all__'

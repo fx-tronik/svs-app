@@ -14,6 +14,8 @@ import ManageCameras from '../views/ManageCameras'
 import ManageCameraZones from '../views/ManageCameraZones'
 import InfrastructureState from '../views/InfrastructureState'
 import AlertsHistory from '../views/AlertsHistory'
+import CreateEmployee from '../views/CreateEmployee'
+import ManageEmployees from '../views/ManageEmployees'
 
 const SvsContent = () => (
           <Content style={{ margin: '0 16px' }}>
@@ -26,6 +28,8 @@ const SvsContent = () => (
 	      <Route path='/manage-cameras' component={ManageCameras}/>
 	      <Route path='/infrastructure' component={InfrastructureState}/>
 	      <Route path='/alert-history' component={AlertsHistory}/>
+        <Route path='/create-employee' component={CreateEmployee}/>
+        <Route path='/manage-employees' component={ManageEmployees}/>
 	    </Switch>
           </Content>
 )

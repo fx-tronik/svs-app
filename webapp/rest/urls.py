@@ -8,6 +8,7 @@ router.register(r'camera', views.CameraViewSet)
 router.register(r'alert-history', views.Alert_historyViewSet)
 router.register(r'infrastructure', views.InfrastructureViewSet)
 router.register(r'zone', views.ZoneViewSet)
+router.register(r'employee', views.EmployeeViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),

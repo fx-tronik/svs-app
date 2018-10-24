@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 
 from enum import Enum
 
@@ -83,5 +83,14 @@ class ZonePolygon(models.Model):
 
     def __str__(self):
         return str(self.zone) + ' | ' + str(self.point_no)
-	
 
+
+class Employee(models.Model):
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    forename = models.CharField(max_length=40, null=True, blank=True)
+    surname = models.CharField(max_length=40, null=True, blank=True)
+    position = models.CharField(max_length=50, null=True, blank=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,12}$', message="Numer telefonu musi być wprowadzony w następującym formacie: '+999999999'. Dozwolone jest od 9 do 12 cyfr.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    car_plate = models.CharField(max_length=10, null=True, blank=True)
