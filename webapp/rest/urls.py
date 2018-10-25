@@ -9,6 +9,14 @@ router.register(r'alert-history', views.Alert_historyViewSet)
 router.register(r'infrastructure', views.InfrastructureViewSet)
 router.register(r'zone', views.ZoneViewSet)
 router.register(r'employee', views.EmployeeViewSet)
+router.register(r'arm-task', views.ArmTaskViewSet)
+router.register(r'arm-output', views.ArmOutputViewSet)
+router.register(r'action', views.ActionViewSet)
+router.register(r'alert', views.AlertViewSet)
+router.register(r'aggregator', views.AggregatorViewSet)
+router.register(r'data', views.DataViewSet)
+router.register(r'parking-config', views.ParkingConfigViewSet)
+router.register(r'parking-history', views.ParkingHistoryViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),

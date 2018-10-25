@@ -542,5 +542,212 @@
 		"x": 663,
 		"y": 260
             }
+        },
+        {
+            "model": "rest.Employee",
+            "pk": 1,
+            "fields": {
+                "forename": "Jan",
+                "surname": "Kowalski",
+                "position": "Manager",
+                "phone_number": "123456789",
+                "email": "jkowalski@company.com",
+                "car_plate": "PKS12345"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 1,
+            "fields": {
+                "description": "DI1",
+                "arm_id": "DI1"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 2,
+            "fields": {
+                "description": "DI2",
+                "arm_id": "DI2"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 3,
+            "fields": {
+                "description": "DI3",
+                "arm_id": "DI3"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 4,
+            "fields": {
+                "description": "DI4",
+                "arm_id": "DI4"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 5,
+            "fields": {
+                "description": "DI5",
+                "arm_id": "DI5"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 6,
+            "fields": {
+                "description": "DI6",
+                "arm_id": "DI6"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 7,
+            "fields": {
+                "description": "DI7",
+                "arm_id": "DI7"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 8,
+            "fields": {
+                "description": "DI8",
+                "arm_id": "DI8"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 9,
+            "fields": {
+                "description": "DO1",
+                "arm_id": "DO1"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 10,
+            "fields": {
+                "description": "DO2",
+                "arm_id": "DO2"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 11,
+            "fields": {
+                "description": "DO3",
+                "arm_id": "DO3"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 12,
+            "fields": {
+                "description": "DO4",
+                "arm_id": "DO4"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 13,
+            "fields": {
+                "description": "DO5",
+                "arm_id": "DO5"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 14,
+            "fields": {
+                "description": "DO6",
+                "arm_id": "DO6"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 15,
+            "fields": {
+                "description": "DO7",
+                "arm_id": "DO7"
+            }
+        },
+        {
+            "model": "rest.ARMOutput",
+            "pk": 16,
+            "fields": {
+                "description": "DO8",
+                "arm_id": "DO8"
+            }
+        },
+        {
+            "model": "rest.ARMTask",
+            "pk": 1,
+            "fields": {
+                "description": "Signal ON",
+                "arm_task": "ON"
+            }
+        },
+        {
+            "model": "rest.ARMTask",
+            "pk": 2,
+            "fields": {
+                "description": "Signal OFF",
+                "arm_task": "OFF"
+            }
+        },
+        {
+            "model": "rest.ARMTask",
+            "pk": 3,
+            "fields": {
+                "description": "Signal BLINK",
+                "arm_task": "BLINK"
+            }
+        },
+        {
+            "model": "rest.ParkingConfig",
+            "pk": 1,
+            "fields": {
+                "name": "1st-parking",
+                "arrival_zone": 5,
+                "departure_zone": 6
+            }
+        },
+        {
+            "model": "rest.ParkingHistory",
+            "pk": 1,
+            "fields": {
+                "plate": "PKS12345",
+                "arrival_time": "2018-10-25 18:46:00",
+		"departure_time": "2018-10-25 20:00:00",
+		"parking_id": 1
+            }
+        },
+        {
+            "model": "rest.CVAggregator",
+            "pk": 1,
+            "fields": {
+                "aggregator": "0",
+                "parent_zone": [
+                       5,
+                       2
+                 ]
+            }
+        },
+        {
+            "model": "rest.Action",
+            "pk": 1,
+            "fields": {
+                "name": "DI1_TURN_ON",
+                "period": null,
+                "unit": "",
+                "message": "TURN ON LAMP AT DESK",
+                "arm_output": 1,
+                "arm_task": 1,
+                "reverseID": null
+            }
         }
 ]

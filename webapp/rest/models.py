@@ -1,7 +1,9 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
-
-from enum import Enum
+from django.contrib.postgres.fields import JSONField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils import timezone
 
 # Create your models here.
 
@@ -90,7 +92,145 @@ class Employee(models.Model):
     forename = models.CharField(max_length=40, null=True, blank=True)
     surname = models.CharField(max_length=40, null=True, blank=True)
     position = models.CharField(max_length=50, null=True, blank=True)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,12}$', message="Numer telefonu musi być wprowadzony w następującym formacie: '+999999999'. Dozwolone jest od 9 do 12 cyfr.")
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,12}$', message="Phone number must follow the pattern: '+[0-9]{9-12}'.")
     phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=True)
     email = models.EmailField(null=True, blank=True)
     car_plate = models.CharField(max_length=10, null=True, blank=True)
+
+
+class ARMTask(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    description = models.CharField(max_length=20, null=True)
+    arm_task = models.CharField(max_length=20)
+
+    def __str__(self):
+        if self.description: return self.description
+        else : return str(self.arm_task)
+
+
+class ARMOutput(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    description = models.CharField(max_length=20, null=True)
+    arm_id = models.CharField(unique=True, max_length=20)
+
+    def __str__(self):
+        if self.description: return self.description
+        else : return str(self.arm_id)
+
+
+class Action(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+
+    name = models.CharField(max_length=20)
+    arm_output = models.ForeignKey('ARMOutput', related_name='output', on_delete=models.PROTECT, null=True)
+    arm_task = models.ForeignKey('ARMTask', related_name='task', on_delete=models.PROTECT, null=True)
+    period = models.IntegerField(null=True, blank=True)
+    unit = models.CharField(max_length=20, null=True, blank=True, default='ms')
+    reverseID = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    message = models.CharField(max_length=50, null=True, blank=True, default='Empty message')
+
+    def __str__(self):
+        return self.name
+
+
+class Alert(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    name = models.CharField(max_length=20)
+    action = models.ManyToManyField('Action')
+    trigger = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(7)])
+
+    class Meta:
+        db_constraints = {
+            'trigger_range': 'check (trigger >=0 AND trigger <=7 )',
+        }
+
+    def __str__(self):
+        return self.name
+
+class CVAggregator(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+
+    parent_zone = models.ManyToManyField('Zone', related_name='zone_aggregators')
+    SUPPORTED_AGGREGATORS = (
+      ('0', 'Silhouette'),
+      ('1', 'Body parts'),
+      ('2', 'Car plates'),
+      ('3', 'Helmet'),
+      ('4', 'Vest'),
+      ('5', 'Forklifts'),
+      ('6', 'Face'),
+      ('7', 'Gesture')
+    )
+    aggregator = models.CharField(max_length=1, choices=SUPPORTED_AGGREGATORS, null=False)
+
+    def __str__(self):
+        return self.aggregator
+
+
+class CVData(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+
+    zone = models.ForeignKey('Zone', on_delete=models.CASCADE)
+    aggregator = models.ForeignKey('CVAggregator', related_name='CVAggregator', on_delete=models.CASCADE)
+    value = JSONField()
+
+    def __str__(self):
+        return 'data no. ' + str(self.id)
+
+    class Meta:
+        unique_together = (("zone", "aggregator"))
+
+@receiver(post_save, sender=CVData)
+def CVData_added(sender, instance, created, **kwargs):
+    if instance.aggregator.aggregator == '2':
+        try:
+            parking_in = ParkingConfig.objects.filter(arrival_zone=instance.zone)
+            parking_out = ParkingConfig.objects.filter(departure_zone=instance.zone)
+            if not (parking_in or parking_out):
+                logger.critical("Zone identified by id: %s is not assigned to any parking" % instance.zone.id)
+                return
+        except ValueError:
+            logger.critical("Improper format of CVData_added")
+            return
+
+        plates = instance.value
+        try:
+            for plate in plates:
+                if len(plate) > 3 and len(plate) <= 10:
+                    for pin in parking_in:
+                        Parking.objects.update_or_create(plate=plate, parking_id=pin)
+                else:
+                    logger.debug("Improper format of car plate")
+        except Exception as e:
+            logger.critical("Unknown error: %s" % e)
+        try:
+            Parking.objects.filter(plate__in=plates, parking__in=parking_out).delete()
+        except Exception as e:
+            logger.critical("Unknown error: %s" % e)
+
+class ParkingConfig(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    name = models.CharField(max_length=50, null=True, blank=True)
+    arrival_zone = models.ForeignKey('Zone', related_name='arrival_zone', on_delete=models.CASCADE, null=True)
+    departure_zone = models.ForeignKey('Zone', related_name='departure_zone', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ParkingHistory(models.Model):
+    id = models.AutoField(primary_key=True, null=False, unique=True)
+    plate = models.CharField(max_length=10, null=True, blank=True)
+    arrival_time = models.DateTimeField(auto_now_add=True)
+    departure_time = models.DateTimeField(null=True)
+    parking_id = models.ForeignKey('ParkingConfig', on_delete=models.CASCADE, null=False)
+
+    def __str__(self):
+        return self.plate

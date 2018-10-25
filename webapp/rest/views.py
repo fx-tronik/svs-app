@@ -38,3 +38,35 @@ class ZoneListView(APIView):
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = models.Employee.objects.all()
     serializer_class = serializers.EmployeeSerializer
+
+class ArmTaskViewSet(viewsets.ModelViewSet):
+    queryset = models.ARMTask.objects.all()
+    serializer_class = serializers.ARMTaskSerializer
+
+class ArmOutputViewSet(viewsets.ModelViewSet):
+    queryset = models.ARMOutput.objects.all()
+    serializer_class = serializers.ARMOutputSerializer
+
+class ActionViewSet(viewsets.ModelViewSet):
+    queryset = models.Action.objects.all()
+    serializer_class = serializers.ActionSerializer
+
+class AlertViewSet(viewsets.ModelViewSet):
+    queryset = models.Alert.objects.all()
+    serializer_class = serializers.AlertSerializer
+
+class AggregatorViewSet(viewsets.ModelViewSet):
+    queryset = models.CVAggregator.objects.all()
+    serializer_class = serializers.AggregatorSerializer
+
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = models.CVData.objects.all()
+    serializer_class = serializers.DataSerializer
+
+class ParkingConfigViewSet(viewsets.ModelViewSet):
+    queryset = models.ParkingConfig.objects.all()
+    serializer_class = serializers.ParkingConfigSerializer
+
+class ParkingHistoryViewSet(viewsets.ModelViewSet):
+    queryset = models.ParkingHistory.objects.all()
+    serializer_class = serializers.ParkingHistorySerializer

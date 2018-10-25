@@ -6,6 +6,14 @@ from rest.models import Infrastructure
 from rest.models import ZonePolygon
 from rest.models import Zone
 from rest.models import Employee
+from rest.models import ARMTask
+from rest.models import ARMOutput
+from rest.models import Action
+from rest.models import Alert
+from rest.models import CVAggregator
+from rest.models import CVData
+from rest.models import ParkingConfig
+from rest.models import ParkingHistory
 
 from django.db.models import F
 
@@ -148,9 +156,56 @@ class CameraSerializer(serializers.ModelSerializer):
 
         return instance
 
-
 class EmployeeSerializer(serializers.ModelSerializer):
 
         class Meta:
             model = Employee
+            fields = '__all__'
+
+class ARMTaskSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = ARMTask
+            fields = '__all__'
+
+class ARMOutputSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = ARMOutput
+            fields = '__all__'
+
+class ActionSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = Action
+            fields = '__all__'
+
+class AlertSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = Alert
+            fields = '__all__'
+
+class AggregatorSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = CVAggregator
+            fields = '__all__'
+
+class DataSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = CVData
+            fields = '__all__'
+
+class ParkingConfigSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = ParkingConfig
+            fields = '__all__'
+
+class ParkingHistorySerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = ParkingHistory
             fields = '__all__'
