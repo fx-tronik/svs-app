@@ -103,7 +103,12 @@ class ManageEmployees extends React.Component {
     this.state = {
       data: [],
       pagination: {},
-      nameSearchText: '',
+      fornameSearchText: '',
+      surnameSearchText: '',
+      positionSearchText: '',
+      phoneNumberSearchText: '',
+      emailSearchText: '',
+      carPlateSearchText: '',
       editingId: ''
     };
     this.columns = [{
@@ -114,32 +119,32 @@ class ManageEmployees extends React.Component {
 	  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
 		<div className="custom-filter-dropdown">
 		  <Input
-		    ref={ele => this.nameSearchInput = ele}
+		    ref={ele => this.fornameSearchInput = ele}
 		    placeholder="Search forename"
 		    value={selectedKeys[0]}
 		    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-		    onPressEnter={this.handleNameSearch(selectedKeys, confirm)}
+		    onPressEnter={this.handleFornameSearch(selectedKeys, confirm)}
 		  />
-		  <Button type="primary" onClick={this.handleNameSearch(selectedKeys, confirm)}>Search</Button>
-		  <Button onClick={this.handleNameReset(clearFilters)}>Reset</Button>
+		  <Button type="primary" onClick={this.handleFornameSearch(selectedKeys, confirm)}>Search</Button>
+		  <Button onClick={this.handleFornameReset(clearFilters)}>Reset</Button>
 		</div>
 	      ),
 	      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-	      onFilter: (value, record) => record.forename.toLowerCase().includes(value.toLowerCase()),
+	      onFilter: (value, record) => (record.forename !== null) ? record.forename.toLowerCase().includes(value.toLowerCase()) : false,
 	      onFilterDropdownVisibleChange: (visible) => {
 		if (visible) {
 		  setTimeout(() => {
-		    this.nameSearchInput.focus();
+		    this.fornameSearchInput.focus();
 		  });
 		}
 	      },
 	      render: (text) => {
-		const { nameSearchText } = this.state;
-		return nameSearchText ? (
+		const { fornameSearchText } = this.state;
+		return fornameSearchText ? (
 		  <span>
 		    {
-			text.split(new RegExp(`(${nameSearchText})|(?=${nameSearchText})`, 'i')).map((fragment, i) => (
-		      fragment.toLowerCase() === nameSearchText.toLowerCase()
+			text.split(new RegExp(`(${fornameSearchText})|(?=${fornameSearchText})`, 'i')).map((fragment, i) => (
+		      fragment.toLowerCase() === fornameSearchText.toLowerCase()
 		        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
 		    ))}
 		  </span>
@@ -153,32 +158,32 @@ class ManageEmployees extends React.Component {
 	  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
 		<div className="custom-filter-dropdown">
 		  <Input
-		    ref={ele => this.nameSearchInput = ele}
+		    ref={ele => this.surnameSearchInput = ele}
 		    placeholder="Search surname"
 		    value={selectedKeys[0]}
 		    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-		    onPressEnter={this.handleNameSearch(selectedKeys, confirm)}
+		    onPressEnter={this.handleSurnameSearch(selectedKeys, confirm)}
 		  />
-		  <Button type="primary" onClick={this.handleNameSearch(selectedKeys, confirm)}>Search</Button>
-		  <Button onClick={this.handleNameReset(clearFilters)}>Reset</Button>
+		  <Button type="primary" onClick={this.handleSurnameSearch(selectedKeys, confirm)}>Search</Button>
+		  <Button onClick={this.handleSurnameReset(clearFilters)}>Reset</Button>
 		</div>
 	      ),
 	      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-	      onFilter: (value, record) => record.surname.toLowerCase().includes(value.toLowerCase()),
+	      onFilter: (value, record) => (record.surname !== null) ? record.surname.toLowerCase().includes(value.toLowerCase()) : false,
 	      onFilterDropdownVisibleChange: (visible) => {
 		if (visible) {
 		  setTimeout(() => {
-		    this.nameSearchInput.focus();
+		    this.surnameSearchInput.focus();
 		  });
 		}
 	      },
 	      render: (text) => {
-		const { nameSearchText } = this.state;
-		return nameSearchText ? (
+		const { surnameSearchText } = this.state;
+		return surnameSearchText ? (
 		  <span>
 		    {
-			text.split(new RegExp(`(${nameSearchText})|(?=${nameSearchText})`, 'i')).map((fragment, i) => (
-		      fragment.toLowerCase() === nameSearchText.toLowerCase()
+			text.split(new RegExp(`(${surnameSearchText})|(?=${surnameSearchText})`, 'i')).map((fragment, i) => (
+		      fragment.toLowerCase() === surnameSearchText.toLowerCase()
 		        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
 		    ))}
 		  </span>
@@ -192,32 +197,32 @@ class ManageEmployees extends React.Component {
 	  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
 		<div className="custom-filter-dropdown">
 		  <Input
-		    ref={ele => this.nameSearchInput = ele}
+		    ref={ele => this.positionSearchInput = ele}
 		    placeholder="Search positon"
 		    value={selectedKeys[0]}
 		    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-		    onPressEnter={this.handleNameSearch(selectedKeys, confirm)}
+		    onPressEnter={this.handlePositionSearch(selectedKeys, confirm)}
 		  />
-		  <Button type="primary" onClick={this.handleNameSearch(selectedKeys, confirm)}>Search</Button>
-		  <Button onClick={this.handleNameReset(clearFilters)}>Reset</Button>
+		  <Button type="primary" onClick={this.handlePositionSearch(selectedKeys, confirm)}>Search</Button>
+		  <Button onClick={this.handlePositionReset(clearFilters)}>Reset</Button>
 		</div>
 	      ),
 	      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-	      onFilter: (value, record) => record.position.toLowerCase().includes(value.toLowerCase()),
+	      onFilter: (value, record) => (record.position !== null) ? record.position.toLowerCase().includes(value.toLowerCase()) : false,
 	      onFilterDropdownVisibleChange: (visible) => {
 		if (visible) {
 		  setTimeout(() => {
-		    this.nameSearchInput.focus();
+		    this.positionSearchInput.focus();
 		  });
 		}
 	      },
 	      render: (text) => {
-		const { nameSearchText } = this.state;
-		return nameSearchText ? (
+		const { positionSearchText } = this.state;
+		return positionSearchText ? (
 		  <span>
 		    {
-			text.split(new RegExp(`(${nameSearchText})|(?=${nameSearchText})`, 'i')).map((fragment, i) => (
-		      fragment.toLowerCase() === nameSearchText.toLowerCase()
+			text.split(new RegExp(`(${positionSearchText})|(?=${positionSearchText})`, 'i')).map((fragment, i) => (
+		      fragment.toLowerCase() === positionSearchText.toLowerCase()
 		        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
 		    ))}
 		  </span>
@@ -231,32 +236,32 @@ class ManageEmployees extends React.Component {
 	  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
 		<div className="custom-filter-dropdown">
 		  <Input
-		    ref={ele => this.nameSearchInput = ele}
+		    ref={ele => this.phoneNumberSearchInput = ele}
 		    placeholder="Search phone number"
 		    value={selectedKeys[0]}
 		    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-		    onPressEnter={this.handleNameSearch(selectedKeys, confirm)}
+		    onPressEnter={this.handlePhoneNumberSearch(selectedKeys, confirm)}
 		  />
-		  <Button type="primary" onClick={this.handleNameSearch(selectedKeys, confirm)}>Search</Button>
-		  <Button onClick={this.handleNameReset(clearFilters)}>Reset</Button>
+		  <Button type="primary" onClick={this.handlePhoneNumberSearch(selectedKeys, confirm)}>Search</Button>
+		  <Button onClick={this.handlePhoneNumberReset(clearFilters)}>Reset</Button>
 		</div>
 	      ),
 	      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-	      onFilter: (value, record) => record.phone_number.toLowerCase().includes(value.toLowerCase()),
+	      onFilter: (value, record) => (record.phone_number !== null) ? record.phone_number.toLowerCase().includes(value.toLowerCase()) : false,
 	      onFilterDropdownVisibleChange: (visible) => {
 		if (visible) {
 		  setTimeout(() => {
-		    this.nameSearchInput.focus();
+		    this.phoneNumberSearchInput.focus();
 		  });
 		}
 	      },
 	      render: (text) => {
-		const { nameSearchText } = this.state;
-		return nameSearchText ? (
+		const { phoneNumberSearchText } = this.state;
+		return phoneNumberSearchText ? (
 		  <span>
 		    {
-			text.split(new RegExp(`(${nameSearchText})|(?=${nameSearchText})`, 'i')).map((fragment, i) => (
-		      fragment.toLowerCase() === nameSearchText.toLowerCase()
+			text.split(new RegExp(`(${phoneNumberSearchText})|(?=${phoneNumberSearchText})`, 'i')).map((fragment, i) => (
+		      fragment.toLowerCase() === phoneNumberSearchText.toLowerCase()
 		        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
 		    ))}
 		  </span>
@@ -270,32 +275,32 @@ class ManageEmployees extends React.Component {
 	  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
 		<div className="custom-filter-dropdown">
 		  <Input
-		    ref={ele => this.nameSearchInput = ele}
+		    ref={ele => this.emailSearchInput = ele}
 		    placeholder="Search email"
 		    value={selectedKeys[0]}
 		    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-		    onPressEnter={this.handleNameSearch(selectedKeys, confirm)}
+		    onPressEnter={this.handleEmailSearch(selectedKeys, confirm)}
 		  />
-		  <Button type="primary" onClick={this.handleNameSearch(selectedKeys, confirm)}>Search</Button>
-		  <Button onClick={this.handleNameReset(clearFilters)}>Reset</Button>
+		  <Button type="primary" onClick={this.handleEmailSearch(selectedKeys, confirm)}>Search</Button>
+		  <Button onClick={this.handleEmailReset(clearFilters)}>Reset</Button>
 		</div>
 	      ),
 	      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-	      onFilter: (value, record) => record.email.toLowerCase().includes(value.toLowerCase()),
+	      onFilter: (value, record) => (record.email !== null) ? record.email.toLowerCase().includes(value.toLowerCase()) : false,
 	      onFilterDropdownVisibleChange: (visible) => {
 		if (visible) {
 		  setTimeout(() => {
-		    this.nameSearchInput.focus();
+		    this.emailSearchInput.focus();
 		  });
 		}
 	      },
 	      render: (text) => {
-		const { nameSearchText } = this.state;
-		return nameSearchText ? (
+		const { emailSearchText } = this.state;
+		return emailSearchText ? (
 		  <span>
 		    {
-			text.split(new RegExp(`(${nameSearchText})|(?=${nameSearchText})`, 'i')).map((fragment, i) => (
-		      fragment.toLowerCase() === nameSearchText.toLowerCase()
+			text.split(new RegExp(`(${emailSearchText})|(?=${emailSearchText})`, 'i')).map((fragment, i) => (
+		      fragment.toLowerCase() === emailSearchText.toLowerCase()
 		        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
 		    ))}
 		  </span>
@@ -309,32 +314,32 @@ class ManageEmployees extends React.Component {
 	  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
 		<div className="custom-filter-dropdown">
 		  <Input
-		    ref={ele => this.nameSearchInput = ele}
+		    ref={ele => this.carPlateSearchInput = ele}
 		    placeholder="Search car plate"
 		    value={selectedKeys[0]}
 		    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-		    onPressEnter={this.handleNameSearch(selectedKeys, confirm)}
+		    onPressEnter={this.handleCarPlateSearch(selectedKeys, confirm)}
 		  />
-		  <Button type="primary" onClick={this.handleNameSearch(selectedKeys, confirm)}>Search</Button>
-		  <Button onClick={this.handleNameReset(clearFilters)}>Reset</Button>
+		  <Button type="primary" onClick={this.handleCarPlateSearch(selectedKeys, confirm)}>Search</Button>
+		  <Button onClick={this.handleCarPlateReset(clearFilters)}>Reset</Button>
 		</div>
 	      ),
 	      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-	      onFilter: (value, record) => record.position.toLowerCase().includes(value.toLowerCase()),
+	      onFilter: (value, record) => (record.car_plate !== null) ? record.car_plate.toLowerCase().includes(value.toLowerCase()) : false,
 	      onFilterDropdownVisibleChange: (visible) => {
 		if (visible) {
 		  setTimeout(() => {
-		    this.nameSearchInput.focus();
+		    this.carPlateSearchInput.focus();
 		  });
 		}
 	      },
 	      render: (text) => {
-		const { nameSearchText } = this.state;
-		return nameSearchText ? (
+		const { carPlateSearchText } = this.state;
+		return carPlateSearchText ? (
 		  <span>
 		    {
-			text.split(new RegExp(`(${nameSearchText})|(?=${nameSearchText})`, 'i')).map((fragment, i) => (
-		      fragment.toLowerCase() === nameSearchText.toLowerCase()
+			text.split(new RegExp(`(${carPlateSearchText})|(?=${carPlateSearchText})`, 'i')).map((fragment, i) => (
+		      fragment.toLowerCase() === carPlateSearchText.toLowerCase()
 		        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
 		    ))}
 		  </span>
@@ -390,14 +395,64 @@ class ManageEmployees extends React.Component {
     });
   }
 
-  handleNameSearch = (selectedKeys, confirm) => () => {
+  handleFornameSearch = (selectedKeys, confirm) => () => {
     confirm();
-    this.setState({ nameSearchText: selectedKeys[0] });
+    this.setState({ fornameSearchText: selectedKeys[0] });
   }
 
-  handleNameReset = clearFilters => () => {
+  handleFornameReset = clearFilters => () => {
     clearFilters();
-    this.setState({ nameSearchText: '' });
+    this.setState({ fornameSearchText: '' });
+  }
+
+  handleSurnameSearch = (selectedKeys, confirm) => () => {
+    confirm();
+    this.setState({ surnameSearchText: selectedKeys[0] });
+  }
+
+  handleSurnameReset = clearFilters => () => {
+    clearFilters();
+    this.setState({ surnameSearchText: '' });
+  }
+
+  handlePositionSearch = (selectedKeys, confirm) => () => {
+    confirm();
+    this.setState({ positionSearchText: selectedKeys[0] });
+  }
+
+  handlePositionReset = clearFilters => () => {
+    clearFilters();
+    this.setState({ positionSearchText: '' });
+  }
+
+  handlePhoneNumberSearch = (selectedKeys, confirm) => () => {
+    confirm();
+    this.setState({ phoneNumberSearchText: selectedKeys[0] });
+  }
+
+  handlePhoneNumberReset = clearFilters => () => {
+    clearFilters();
+    this.setState({ phoneNumberSearchText: '' });
+  }
+
+  handleEmailSearch = (selectedKeys, confirm) => () => {
+    confirm();
+    this.setState({ emailSearchText: selectedKeys[0] });
+  }
+
+  handleEmailReset = clearFilters => () => {
+    clearFilters();
+    this.setState({ emailSearchText: '' });
+  }
+
+  handleCarPlateSearch = (selectedKeys, confirm) => () => {
+    confirm();
+    this.setState({ carPlateSearchText: selectedKeys[0] });
+  }
+
+  handleCarPlateReset = clearFilters => () => {
+    clearFilters();
+    this.setState({ carPlateSearchText: '' });
   }
 
   handleDelete = (id) => {
@@ -508,7 +563,7 @@ class ManageEmployees extends React.Component {
 	    	return (
 			<div>
 			    <Breadcrumb style={{ margin: '16px 0' }}>
-			      <Breadcrumb.Item><Icon type="bars" /><span>Employee</span></Breadcrumb.Item>
+			      <Breadcrumb.Item><Icon type="idcard" /><span>Employee</span></Breadcrumb.Item>
 			      <Breadcrumb.Item><Icon type="edit" /><span>Manage</span></Breadcrumb.Item>
 			    </Breadcrumb>
 			    <div style={{ padding: 24, minHeight: '100%', minWidth: '100%' }}>
@@ -520,7 +575,7 @@ class ManageEmployees extends React.Component {
 	return (
 		<div>
 		    <Breadcrumb style={{ margin: '16px 0' }}>
-		      <Breadcrumb.Item><Icon type="bars" /><span>Employee</span></Breadcrumb.Item>
+		      <Breadcrumb.Item><Icon type="idcard" /><span>Employee</span></Breadcrumb.Item>
 		      <Breadcrumb.Item><Icon type="edit" /><span>Manage</span></Breadcrumb.Item>
 		    </Breadcrumb>
 		    <div style={{ padding: 24, minHeight: '100%', minWidth: '100%' }}>

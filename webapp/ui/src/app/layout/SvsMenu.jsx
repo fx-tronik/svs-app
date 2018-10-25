@@ -13,7 +13,7 @@ const SubMenu = Menu.SubMenu;
 const menuItems = [
             {name : "camera-type", label : "Camera type", iconType : "bars"},
             {name : "camera", label : "Camera", iconType : "camera"},
-            {name : "employee", label : "Employees", iconType : "idcard"}
+            {name : "employee", label : "Employee", iconType : "idcard"}
 ];
 
 const actions = [

@@ -241,7 +241,7 @@ class CreateEmployee extends React.Component {
 			return (
 				<div>
 				    <Breadcrumb style={{ margin: '16px 0' }}>
-				      <Breadcrumb.Item><Icon type="bars" /><span>Camera type</span></Breadcrumb.Item>
+				      <Breadcrumb.Item><Icon type="idcard" /><span>Employee</span></Breadcrumb.Item>
 				      <Breadcrumb.Item><Icon type="plus-circle" /><span>Create</span></Breadcrumb.Item>
 				    </Breadcrumb>
 				    <div style={{ padding: 24, minHeight: '100%', minWidth: '100%' }}>
@@ -255,7 +255,7 @@ class CreateEmployee extends React.Component {
 		    	return (
 				<div>
 				    <Breadcrumb style={{ margin: '16px 0' }}>
-				      <Breadcrumb.Item><Icon type="bars" /><span>Camera type</span></Breadcrumb.Item>
+				      <Breadcrumb.Item><Icon type="idcard" /><span>Employee</span></Breadcrumb.Item>
 				      <Breadcrumb.Item><Icon type="plus-circle" /><span>Create</span></Breadcrumb.Item>
 				    </Breadcrumb>
 				    <div style={{ padding: 24, minHeight: '100%', minWidth: '100%' }}>
@@ -268,7 +268,7 @@ class CreateEmployee extends React.Component {
 		return (
 			<div>
 			    <Breadcrumb style={{ margin: '16px 0' }}>
-			      <Breadcrumb.Item><Icon type="bars" /><span>Camera type</span></Breadcrumb.Item>
+			      <Breadcrumb.Item><Icon type="idcard" /><span>Employee</span></Breadcrumb.Item>
 			      <Breadcrumb.Item><Icon type="plus-circle" /><span>Create</span></Breadcrumb.Item>
 			    </Breadcrumb>
 			    <WrappedEmployeeForm onSubmit={this.onSubmit}/>
